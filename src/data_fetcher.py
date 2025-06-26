@@ -50,7 +50,12 @@ if __name__ == '__main__':
         os.makedirs('data')
 
     # Define the tickers and date range
-    tickers = ['BTC-USD', 'ETH-USD']
+    tickers = [
+        'BTC-USD', 'ETH-USD', 'XRP-USD', 'BCH-USD', 'LTC-USD', 'EOS-USD',
+        'SOL-USD', 'UNI-USD', 'PEPE-USD', 'NEAR-USD', 'AAVE-USD', 'VET-USD',
+        'XMR-USD', 'FTM-USD', 'ALGO-USD', 'OMG-USD', 'CRV-USD', 'YFI-USD',
+        'OKB-USD', 'RUNE-USD'
+    ]
     start_date = '2022-01-01'
     end_date = '2023-01-01'
 
