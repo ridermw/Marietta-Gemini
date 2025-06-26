@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
 import os
+from src import config
 
 def fetch_crypto_data(ticker, start_date, end_date):
     """
@@ -46,24 +47,16 @@ def fetch_multiple_crypto_data(tickers, start_date, end_date):
 
 if __name__ == '__main__':
     # Create the data directory if it doesn't exist
-    if not os.path.exists('data'):
-        os.makedirs('data')
+    if not os.path.exists(config.DATA_DIR):
+        os.makedirs(config.DATA_DIR)
 
-    # Define the tickers and date range
-    tickers = [
-        'BTC-USD', 'ETH-USD', 'XRP-USD', 'BCH-USD', 'LTC-USD', 'EOS-USD',
-        'SOL-USD', 'UNI-USD', 'PEPE-USD', 'NEAR-USD', 'AAVE-USD', 'VET-USD',
-        'XMR-USD', 'FTM-USD', 'ALGO-USD', 'OMG-USD', 'CRV-USD', 'YFI-USD',
-        'OKB-USD', 'RUNE-USD'
-    ]
-    start_date = '2022-01-01'
-    end_date = '2023-01-01'
-
-    # Fetch data for the specified tickers
-    crypto_data = fetch_multiple_crypto_data(tickers, start_date, end_date)
+    # Fetch data using parameters from the config file
+    crypto_data = fetch_multiple_crypto_data(
+        tickers=config.TICKERS, start_date=config.START_DATE, end_date=config.END_DATE
+    )
 
     # Save the data to CSV files
     for ticker, data in crypto_data.items():
-        file_path = f'data/{ticker.lower()}.csv'
+        file_path = os.path.join(config.DATA_DIR, f'{ticker.lower()}.csv')
         data.to_csv(file_path)
         print(f"{ticker} data saved to {file_path}")
